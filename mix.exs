@@ -6,7 +6,7 @@ defmodule TeslaDumper.MixProject do
     [
       app: :tesla_dumper,
       version: @version,
-      elixir: "~> 1.13",
+      elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
       elixirc_paths: elixirc_paths(Mix.env()),
       deps: deps(),
