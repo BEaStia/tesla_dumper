@@ -4,16 +4,18 @@ defmodule TeslaDumper do
   """
   @behaviour Tesla.Middleware
 
+  @delimeter "/ \n"
+
   @impl true
-  @spec call(map, maybe_improper_list, any) :: any
-  def call(env, next, _options) do
+  def call(env, next, options) do
+    delimiter = Keyword.get(options, :delimiter, @delimeter)
     {curl_command, _} =
       {[], env}
       |> build_body()
       |> build_headers()
       |> build_method_and_url()
 
-    env = Map.put(env, :curl_command, Enum.join(curl_command, "\n"))
+    env = Map.put(env, :curl_command, Enum.join(curl_command, delimiter))
 
     Tesla.run(env, next)
   end
