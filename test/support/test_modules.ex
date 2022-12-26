@@ -6,7 +6,7 @@ defmodule DummyGithubClient do
 
   plug(Tesla.Middleware.Headers, [{"authorization", "token xyz"}])
   plug(Tesla.Middleware.JSON)
-  plug(TeslaDumper)
+  plug(TeslaDumper, delimiter: "\n")
 
   def user_repos(url, login) do
     get(url <> "/" <> login)
